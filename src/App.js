@@ -159,7 +159,6 @@ export default class App extends Component {
           path="/Weight"
           render={() => (
             <Weight
-              user={this.state.user}
               weights={this.state.weights}
               setAppState={this.setAppState}
               weightsUrl={WEIGHTS_URL}

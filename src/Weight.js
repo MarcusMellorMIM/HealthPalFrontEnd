@@ -86,12 +86,6 @@ export default class Weight extends Component {
   submitWeight = event => {
     // Used to create a new weight, or update an existing one
     event.preventDefault();
-    let weights = [...this.props.weights];
-
-    // The date handling is now done on the backend
-    let weight = {};
-    Object.assign(weight, this.state.weight, { user_id: this.props.user.id });
-
     if (this.state.weight.id === "") {
       this.insertWeight();
     } else {
