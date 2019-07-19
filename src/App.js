@@ -1,26 +1,174 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { login, getCurrentUser } from "./auth";
+import { getConfigObj, getJWTHeaders } from "./api";
+import { Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { dateString, timeString } from "./helpers";
+import Signup from "./Signup";
+import Login from "./Login";
+import NavBar from "./NavBar";
+import Weight from "./Weight";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+// const BASE_URL = `http://localhost:3000`
+const BASE_URL = `https://healthpal-api.herokuapp.com`;
+const USERS_URL = `${BASE_URL}/users`;
+const WEIGHTS_URL = `${BASE_URL}/weights`;
+
+export default class App extends Component {
+  // Use the contructor to set the initial state
+  constructor() {
+    super();
+    this.state = { isLoggedIn: false, 
+                user: null,
+                weights: [],
+             };
+  }
+
+  componentDidMount() {
+    // Deal with auth tokens as the page mounts.
+    // If a valid token, login else go to sign up page
+    const token = localStorage.getItem("token");
+    if (token) {
+      getCurrentUser(BASE_URL, token)
+        .then(user => {
+          this.setState({ isLoggedIn: true, user: user });
+        })
+        .then(() => {
+          this.getUserData();
+        });
+    }
+  }
+
+  getUserData = () => {
+    // Is used to get the initial set of data for the user
+    fetch(WEIGHTS_URL, getJWTHeaders() )
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ weights: data });
+      });
+
+  };
+
+  changeUser = event => {
+    // The handler that changes the user state, for either new or updates of a user
+    let user = {};
+    Object.assign(user, this.state.user);
+    user[event.target.name] = event.target.value;
+    this.setState({ user: user });
+  };
+
+  createUser = event => {
+  // Create a new user, setting JWT tokens etc
+    event.preventDefault();
+    if ( this.state.user.user_name && this.state.user.name && this.state.password  ) {
+      
+      let configObj = getConfigObj( "POST", this.state.user );
+
+      fetch(USERS_URL, configObj)
+      .then(data => data.json())
+      .then( () => login(BASE_URL, this.state.user.user_name, this.state.user.password) )
+      .then( data => {
+        localStorage.setItem("token", data.jwt);
+        this.setState({ isLoggedIn: true, user: data.user });
+        this.getUserData();
+      })
+      .catch(err => { console.log(err) })
+    } else {
+      alert("Please enter your user name, name and password");
+    }  
+  }
+
+
+  handleLoginChange = event => {
+// Simply sets the user state when an item is modified in the Signup container
+    let user = {};
+    Object.assign(user, this.state.user);
+    user[event.target.name] = event.target.value;
+    this.setState({ user: user });
+  };
+
+  handleLogin = event => {
+// Is called when a user logins in, in the Login container
+    event.preventDefault();
+    login(BASE_URL, this.state.user.user_name, this.state.user.password)
+    .then(data => {
+      if (data.error) {
+        alert("something is wrong with your credentials" + data.error);
+        this.setState({ user_name: "", password: "" });
+      } else {
+        localStorage.setItem("token", data.jwt);
+        this.setState({ isLoggedIn: true, user: data.user });
+        this.getUserData();
+      }
+    });
+  };
+
+  handleLogOut = () => {
+  // Will reset user state, putting the system into a position to allow
+  // another user to log in.
+    localStorage.clear("token");
+    this.setState({
+      user: null,
+      isLoggedIn: false
+    });
+  };
+
+
+  setAppState = ( stateObj ) => {
+    // Callback to allow child components to manipulate App state
+    this.setState( stateObj )
+  }
+
+  render() {
+// Now render the page ... here is where the fun starts
+    return (
+      <Router>
+ 
+       <NavBar
+          isLoggedIn={this.state.isLoggedIn}
+          handleLogOut={this.handleLogOut}
+        />
+ 
+        <Route
+          path="/Login"
+          render={() => (
+            <Login
+              handleLoginChange={this.handleLoginChange}
+              user={this.state.user}
+              isLoggedIn={this.state.isLoggedIn}
+              handleLogin={this.handleLogin}
+              handleLogOut={this.handleLogOut}
+            />
+          )}
+        />
+
+        <Route
+          path="/Signup"
+          render={() => (
+            <Signup
+              user={this.state.user}
+              isLoggedIn={this.state.isLoggedIn}
+              createUser={this.createUser}
+              changeUser={this.changeUser}
+            />
+          )}
+        />
+
+        <Route
+          path="/Weight"
+          render={() => (
+            <Weight
+              user={this.state.user}
+              weights={this.state.weights}
+              setAppState={this.setAppState}
+              weightsUrl={WEIGHTS_URL}
+            />
+          )}
+        />
+
+      </Router>
+    );
+  } // End of render function
+
 }
-
-export default App;
