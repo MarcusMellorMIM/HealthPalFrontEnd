@@ -8,12 +8,17 @@ import Signup from "./Signup";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Weight from "./Weight";
+import Input from "./Input";
 
 
 // const BASE_URL = `http://localhost:3000`
 const BASE_URL = `https://healthpal-api.herokuapp.com`;
 const USERS_URL = `${BASE_URL}/users`;
 const WEIGHTS_URL = `${BASE_URL}/weights`;
+const INPUTS_URL = `${BASE_URL}/inputs`;
+const ACTIVITIES_URL = `${BASE_URL}/activities`;
+const APIINPUTS_URL = `${BASE_URL}/api/input`;
+const APIACTIVITIES_URL = `${BASE_URL}/api/activities`;
 
 export default class App extends Component {
   // Use the contructor to set the initial state
@@ -22,6 +27,7 @@ export default class App extends Component {
     this.state = { isLoggedIn: false, 
                 user: null,
                 weights: [],
+                inputs: []
              };
   }
 
@@ -42,11 +48,19 @@ export default class App extends Component {
 
   getUserData = () => {
     // Is used to get the initial set of data for the user
-    fetch(WEIGHTS_URL, getJWTHeaders() )
+    let headers=getJWTHeaders();
+    fetch(WEIGHTS_URL, headers )
       .then(response => response.json())
       .then(data => {
         this.setState({ weights: data });
       });
+
+    fetch(INPUTS_URL, headers)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ inputs: data });
+    });
+
 
   };
 
@@ -162,6 +176,18 @@ export default class App extends Component {
               weights={this.state.weights}
               setAppState={this.setAppState}
               weightsUrl={WEIGHTS_URL}
+            />
+          )}
+        />
+
+        <Route
+          path="/Input"
+          render={() => (
+            <Input
+              inputs={this.state.inputs}
+              setAppState={this.setAppState}
+              inputsUrl={INPUTS_URL}
+              apiInputsUrl={APIINPUTS_URL}
             />
           )}
         />

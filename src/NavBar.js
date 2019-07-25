@@ -8,8 +8,8 @@ class NavBar extends Component {
     return this.props.isLoggedIn ? (
       <div className="usernav">
         <NavLink to="/Weight">Weight</NavLink>
-        {/* <NavLink to="/Food"> Food</NavLink>
-        <NavLink to="/Exercise">Exercise</NavLink>
+        <NavLink to="/Input"> Inputs</NavLink>
+        {/* <NavLink to="/Exercise">Exercise</NavLink>
         <NavLink to="/Dashboard"> Dashboard</NavLink> */}
         <NavLink to="/Account"> Account</NavLink>
         <NavLink to="/Login" onClick={this.props.handleLogOut}>
