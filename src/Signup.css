@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-size: 14px;
+  }
+  
+  /* Main */
+  /* Recomend you add stark colours as background until you have sorted margins and paddings etc */
+  .signup {
+    height: 90vh; /* Is responsive as we use view height */
+    background: linear-gradient( #005479, #012b44 ); /* Sets a background gradient .. you can add % for gradients */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .signup_title_create {
+    font-size: 15em; /* Very big */
+    color: #fff; /* Color is white */
+    opacity: .1; /* Make it see thru */
+  /*  transform: translate(0,-30%) rotate(-10deg); */
+    position: absolute;
+    top: +0%;
+    text-align: left;
+    line-height: 0%; 
+    z-index: 1; /* A positioning attribute */
+  }
+  
+  .signup_title_account {
+    font-size: 15em; /* Very big */
+  color: #fff; /* Color is white */
+  opacity: .1; /* Make it see thru */
+/*  transform: translate(0,-30%) rotate(-10deg); */
+  position: absolute;
+  right: +10%; 
+  z-index: 1; /* A positioning attribute */
+}
+
+.signup_instruction1 {
+    width: 25%;
+    position: absolute;
+    left: 10%;
+    top: 10%;
+    text-align: center;
+  }
+  
+.signup_instruction2 {
+    width: 25%;
+    position: absolute;
+    left: 65%;
+    top: 40%;
+    text-align: center;
+  }
+
+.signup_instruction3 {
+    width: 25%;
+    position: absolute;
+    left: 10%;
+    top: 65%;
+    text-align: center;
+    z-index: 20;
+  }
+
+a {
+    color: #fff;
+}
+
+.signup_entry {
+    display: flex; 
+    flex-direction: column;
+    z-index: 10;
+    align-content: center;
+    text-align: center;
+  }
+
+  .signup_logged_in {
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    align-content: center;
+    text-align: center;
+    width: 20em;
+  }
+  
+  .signup_input {
+    opacity: .5; /* Make it see thru */
+    width: 20em;
+  }
+  
+  .signup_buttons {
+    width: 20em;
+    margin: auto;
+  }

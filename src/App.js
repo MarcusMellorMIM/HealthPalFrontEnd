@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { login, getCurrentUser } from "./auth";
 import { getConfigObj, getJWTHeaders } from "./api";
-import { Redirect } from 'react-router-dom'
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { dateString, timeString } from "./helpers";
-import { NavLink } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import NavBar from "./NavBar";
@@ -22,12 +19,20 @@ const ACTIVITIES_URL = `${BASE_URL}/activities`;
 const APIINPUTS_URL = `${BASE_URL}/api/input`;
 const APIACTIVITIES_URL = `${BASE_URL}/api/activity`;
 
+const EMPTYUSER = {
+  user_name: "",
+  name: "",
+  dob: "",
+  gender: "",
+  height_cm:""  
+};
+
 export default class App extends Component {
   // Use the contructor to set the initial state
   constructor() {
     super();
     this.state = { isLoggedIn: false, 
-                user: null,
+                user: EMPTYUSER,
                 weights: [],
                 inputs: [],
                 activities: []
@@ -80,10 +85,23 @@ export default class App extends Component {
     this.setState({ user: user });
   };
 
-  createUser = event => {
-  // Create a new user, setting JWT tokens etc
+  submitUser = event => {
+
     event.preventDefault();
-    if ( this.state.user.user_name && this.state.user.name && this.state.password  ) {
+
+    if (this.state.user.id) {
+      console.log('Update user')
+      this.updateUser()
+    } else {
+      this.createUser()
+    }
+
+  }
+
+  createUser = () => {
+  // Create a new user, setting JWT tokens etc
+    
+    if ( this.state.user.user_name && this.state.user.name && this.state.user.password  ) {
       
       let configObj = getConfigObj( "POST", this.state.user );
 
@@ -97,10 +115,29 @@ export default class App extends Component {
       })
       .catch(err => { console.log(err) })
     } else {
-      alert("Please enter your user name, name and password");
+      alert(`Please enter your user name, name and password`);
     }  
   }
 
+  updateUser = () => {
+    // Update the user, 
+    // Possibly dont need to set JWT tokens and relogin etc ....       
+      if ( this.state.user.user_name && this.state.user.name  ) {
+        
+        let configObj = getConfigObj( "PATCH", this.state.user );  
+  
+        // For security reasons, only use the token to get the user to be updated
+        fetch(`${USERS_URL}/update`, configObj)
+          .then(data => data.json())
+          .then( data => {
+            this.setState({ isLoggedIn: true, user: data });
+        })
+        .catch(err => { console.log(err) })
+      } else {
+        alert(`Please enter your user name and name`);
+      }  
+    }
+  
 
   handleLoginChange = event => {
 // Simply sets the user state when an item is modified in the Signup container
@@ -131,7 +168,7 @@ export default class App extends Component {
   // another user to log in.
     localStorage.clear("token");
     this.setState({
-      user: null,
+      user: EMPTYUSER,
       isLoggedIn: false
     });
   };
@@ -170,8 +207,22 @@ export default class App extends Component {
             <Signup
               user={this.state.user}
               isLoggedIn={this.state.isLoggedIn}
-              createUser={this.createUser}
+              submitUser={this.submitUser}
               changeUser={this.changeUser}
+              handleLogOut={this.handleLogOut}
+            />
+          )}
+        />
+
+        <Route
+          path="/Account"
+          render={() => (
+            <Signup
+              user={this.state.user}
+              isLoggedIn={this.state.isLoggedIn}
+              submitUser={this.submitUser}
+              changeUser={this.changeUser}
+              handleLogOut={this.handleLogOut}
             />
           )}
         />
