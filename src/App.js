@@ -4,21 +4,23 @@ import { getConfigObj, getJWTHeaders } from "./api";
 import { Redirect } from 'react-router-dom'
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { dateString, timeString } from "./helpers";
+import { NavLink } from "react-router-dom";
 import Signup from "./Signup";
 import Login from "./Login";
 import NavBar from "./NavBar";
 import Weight from "./Weight";
 import Input from "./Input";
+import Activity from "./Activity";
 
 
-// const BASE_URL = `http://localhost:3000`
-const BASE_URL = `https://healthpal-api.herokuapp.com`;
+const BASE_URL = `http://localhost:3000`
+//const BASE_URL = `https://healthpal-api.herokuapp.com`;
 const USERS_URL = `${BASE_URL}/users`;
 const WEIGHTS_URL = `${BASE_URL}/weights`;
 const INPUTS_URL = `${BASE_URL}/inputs`;
 const ACTIVITIES_URL = `${BASE_URL}/activities`;
 const APIINPUTS_URL = `${BASE_URL}/api/input`;
-const APIACTIVITIES_URL = `${BASE_URL}/api/activities`;
+const APIACTIVITIES_URL = `${BASE_URL}/api/activity`;
 
 export default class App extends Component {
   // Use the contructor to set the initial state
@@ -27,7 +29,8 @@ export default class App extends Component {
     this.state = { isLoggedIn: false, 
                 user: null,
                 weights: [],
-                inputs: []
+                inputs: [],
+                activities: []
              };
   }
 
@@ -61,6 +64,11 @@ export default class App extends Component {
       this.setState({ inputs: data });
     });
 
+    fetch(ACTIVITIES_URL, headers)
+    .then(response => response.json())
+    .then(data => {
+      this.setState({ activities: data });
+    });
 
   };
 
@@ -128,7 +136,6 @@ export default class App extends Component {
     });
   };
 
-
   setAppState = ( stateObj ) => {
     // Callback to allow child components to manipulate App state
     this.setState( stateObj )
@@ -188,6 +195,18 @@ export default class App extends Component {
               setAppState={this.setAppState}
               inputsUrl={INPUTS_URL}
               apiInputsUrl={APIINPUTS_URL}
+            />
+          )}
+        />
+
+        <Route
+          path="/Activity"
+          render={() => (
+            <Activity
+              activities={this.state.activities}
+              setAppState={this.setAppState}
+              activitiesUrl={ACTIVITIES_URL}
+              apiActivitiesUrl={APIACTIVITIES_URL}
             />
           )}
         />

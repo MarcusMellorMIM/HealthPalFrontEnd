@@ -48,6 +48,7 @@ save the meal into the database */}
             <select
               defaultValue="1"
               name="input_type_id"
+              value={this.props.input.input_type_id}
               onChange={this.props.changeInput}
             >
               <option value="1">Angelic</option>

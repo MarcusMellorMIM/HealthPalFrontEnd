@@ -12,7 +12,7 @@ import {
     MarkSeries
   } from "react-vis";
   
-class InputShowGraph extends Component {
+class ActivityShowGraph extends Component {
 
     returnColor =(id) => {
         // Display the colour of the meal, depending on type
@@ -31,14 +31,14 @@ class InputShowGraph extends Component {
     }
  
     genGraphData = () => {
-        // Render the weight object into a form the graph object understands
-        let data = this.props.inputs.map(input => {
-          return { x: Date.parse(input.input_date), 
-                    y: hourString(input.input_date), 
-                    label:input.detail,
-                    size: this.categoriseCalories(input.calories), 
-                    style:{ color:this.returnColor(input.input_type_id) }, 
-                    id:input.id };
+        // Render the exercise object into a form the graph object understands
+        let data = this.props.activities.map(a => {
+          return { x: Date.parse(a.activity_date), 
+                    y: hourString(a.activity_date), 
+                    label:a.detail,
+                    size: this.categoriseCalories(a.calories), 
+                    style:{ color:this.returnColor(a.activity_type_id) }, 
+                    id:a.id };
         });    
         return data;
       };
@@ -47,7 +47,7 @@ class InputShowGraph extends Component {
     return ( 
         <div>
         
-        <h2>Click on the graph, to select a meal to update or delete</h2>
+        <h2>Click on the graph, to select an activity to update or delete</h2>
         <XYPlot
         xType="time"
         height={500}
@@ -61,7 +61,7 @@ class InputShowGraph extends Component {
         <MarkSeries
             sizeRange={[5,15]}
             data={this.genGraphData()}
-            onValueClick= {(datapoint,event) => this.props.selectInput(datapoint,event)}
+            onValueClick= {(datapoint,event) => this.props.selectActivity(datapoint,event)}
         />
       </XYPlot>
       </div>
@@ -70,4 +70,4 @@ class InputShowGraph extends Component {
 }
 }
 
-export default InputShowGraph;
+export default ActivityShowGraph;

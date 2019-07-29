@@ -9,3 +9,8 @@ export const timeString = (date) => {
     // Used by the time part of a date item .. will return the HH:MI bit of a date
     return !!date ? date.toString().slice(11, 16) : null;
   };
+
+export const hourString = (date) => {
+    // Used by the time part of a date item .. will return the HH bit of a date
+      return !!date ? date.toString().slice(11,13) : 12 
+  };

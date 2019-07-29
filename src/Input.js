@@ -54,10 +54,12 @@ class Input extends Component {
     // Used to call the API and get the main input detail records, that will then be
     // saved with submitInputDetail
     event.preventDefault();
+    let input = {...this.state.input}
 
     fetch(this.props.apiInputsUrl, getConfigObj("POST", this.state.input.detail) )
       .then(data => data.json())
-      .then( data => this.setState( { input: {input:data}} ))
+      .then(data => Object.assign(input,{input_details:data}))
+      .then( data => this.setState( { input: data } ))
   
   };
 
@@ -87,12 +89,10 @@ class Input extends Component {
 
   createInputDetail = () => {
     // Creates new input and input detail records
-    let input = {};
+    console.log("Creating a new input")
     let inputs = [...this.props.inputs];
 
-    Object.assign(inputs, this.state.input );
-
-    fetch(this.props.inputsUrl, getConfigObj("POST", input))
+    fetch(this.props.inputsUrl, getConfigObj("POST", this.state.input))
       .then(data => data.json())
       .then(data => {
         inputs.push(data);
@@ -112,7 +112,7 @@ class Input extends Component {
     .then(
       () => {
         let inputs = this.props.inputs.filter(f => f.id !== this.state.input.id);
-        this.setAppState({ inputs: inputs });
+        this.props.setAppState({ inputs: inputs });
         this.setState({ input: EMPTYINPUT });
       }
     );
@@ -121,6 +121,7 @@ class Input extends Component {
   selectInput = (datapoint, event) => {
     // Called when a point on the graph is called - it will show the details
     let input = {};
+    console.log(datapoint.id)
     Object.assign(input, this.props.inputs.find(f => f.id === datapoint.id));
     // Add the split date items to allow the date and time input fields in input state to work
     Object.assign(

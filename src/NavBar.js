@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-
 import { NavLink } from "react-router-dom";
+
 
 class NavBar extends Component {
   render() {
@@ -9,8 +9,8 @@ class NavBar extends Component {
       <div className="usernav">
         <NavLink to="/Weight">Weight</NavLink>
         <NavLink to="/Input"> Inputs</NavLink>
-        {/* <NavLink to="/Exercise">Exercise</NavLink>
-        <NavLink to="/Dashboard"> Dashboard</NavLink> */}
+        <NavLink to="/Activity">Activities</NavLink>
+        {/* <NavLink to="/Dashboard"> Dashboard</NavLink> */}
         <NavLink to="/Account"> Account</NavLink>
         <NavLink to="/Login" onClick={this.props.handleLogOut}>
           Logout
