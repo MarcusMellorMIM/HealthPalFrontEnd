@@ -18,7 +18,7 @@ class Signup extends Component {
           <div className="signup_instruction2">
                 <p>Feedback is always welcome, from irritating bug to incredible functional ask.</p>
                 <p>Please send your amazing idea, via email to </p>
-                <a href="mailto:EvaHealthyPal@gmail.com?subject=Feedback&body=Hi Eva, I have a great suggestion for your amazing app">Eva your Health Pal</a>
+                <a className="email" href="mailto:EvaHealthyPal@gmail.com?subject=Feedback&body=Hi Eva, I have a great suggestion for your amazing app">Eva your Health Pal</a>
           </div> 
 
           <div className="signup_instruction3">

@@ -187,7 +187,20 @@ export default class App extends Component {
           isLoggedIn={this.state.isLoggedIn}
           handleLogOut={this.handleLogOut}
         />
- 
+
+        <Route
+          path="/"
+          render={() => (
+            <Login
+              handleLoginChange={this.handleLoginChange}
+              user={this.state.user}
+              isLoggedIn={this.state.isLoggedIn}
+              handleLogin={this.handleLogin}
+              handleLogOut={this.handleLogOut}
+            />
+          )}
+        />
+
         <Route
           path="/Login"
           render={() => (
