@@ -18,6 +18,9 @@ class Login extends Component {
         <div className="login_instructions2" >
           <p>Coming soon ..... goals, better daily views, more coaching from Eva your Alexa skill, multiple health pal accounts against one alexa device ... and so much more.</p>
           <p>Even though your data is protected with JWT authentication, we cannot guarantee its security until a production service is released. Please do not enter any data that you deem personal, and that you are unwilling to share.</p>       
+          <p>Feedback is always welcome, from irritating bug to incredible functional ask. Please send your amazing idea, via email to </p>
+          <a className="email" href="mailto:EvaHealthyPal@gmail.com?subject=Feedback&body=Hi Eva, I have a great suggestion for your amazing app">Eva your Health Pal</a>
+
         </div>
 
 

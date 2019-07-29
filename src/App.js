@@ -189,7 +189,7 @@ export default class App extends Component {
         />
 
         <Route
-          path="/"
+          exact path="/"
           render={() => (
             <Login
               handleLoginChange={this.handleLoginChange}
