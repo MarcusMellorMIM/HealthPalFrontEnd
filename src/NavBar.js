@@ -6,20 +6,20 @@ class NavBar extends Component {
   render() {
 
     return this.props.isLoggedIn ? (
-      <div className="usernav">
+      <div className="main_nav">
         <NavLink to="/Weight">Weight</NavLink>
-        <NavLink to="/Input"> Inputs</NavLink>
+        <NavLink to="/Input">Inputs</NavLink>
         <NavLink to="/Activity">Activities</NavLink>
         {/* <NavLink to="/Dashboard"> Dashboard</NavLink> */}
-        <NavLink to="/Account"> Account</NavLink>
+        <NavLink to="/Account">Account</NavLink>
         <NavLink to="/Login" onClick={this.props.handleLogOut}>
           Logout
         </NavLink>
       </div>
     ) : (
-      <div className="usernav">
+      <div className="main_nav">
         <NavLink to="/Login">Login</NavLink>
-        <NavLink to="/Signup"> Signup</NavLink>
+        <NavLink to="/Signup">Register</NavLink>
       </div>
     );
   }

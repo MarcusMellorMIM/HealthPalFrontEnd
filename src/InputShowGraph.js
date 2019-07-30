@@ -5,8 +5,6 @@ import {
     XYPlot,
     XAxis,
     YAxis,
-    LabelSeries,
-    ChartLabel,
     HorizontalGridLines,
     VerticalGridLines,
     MarkSeries
@@ -36,22 +34,26 @@ class InputShowGraph extends Component {
           return { x: Date.parse(input.input_date), 
                     y: hourString(input.input_date), 
                     label:input.detail,
-                    size: this.categoriseCalories(input.calories), 
-                    style:{ color:this.returnColor(input.input_type_id) }, 
+                    size: this.categoriseCalories(input.calories),
+                    color:this.returnColor(input.input_type_id),
                     id:input.id };
         });    
         return data;
       };
     
   render() {
+
+    let graphData = this.genGraphData();
+
     return ( 
-        <div>
+        <div className="main_graph">
         
         <h2>Click on the graph, to select a meal to update or delete</h2>
         <XYPlot
         xType="time"
         height={500}
         width={500}
+        color="red"
         margin={{ left: 120, right: 20, top: 20, bottom: 120 }}
         >
         <HorizontalGridLines />
@@ -60,9 +62,24 @@ class InputShowGraph extends Component {
         <YAxis title="Time" width={100} />
         <MarkSeries
             sizeRange={[5,15]}
-            data={this.genGraphData()}
+            data={graphData.filter(gd => gd.color==="red")  }
+            color="red"
             onValueClick= {(datapoint,event) => this.props.selectInput(datapoint,event)}
         />
+        <MarkSeries
+            sizeRange={[5,15]}
+            data={graphData.filter(gd => gd.color==="yellow")  }
+            color="yellow"
+            onValueClick= {(datapoint,event) => this.props.selectInput(datapoint,event)}
+        />
+       <MarkSeries
+            sizeRange={[5,15]}
+            data={graphData.filter(gd => gd.color==="green")  }
+            color="green"
+            onValueClick= {(datapoint,event) => this.props.selectInput(datapoint,event)}
+        />
+
+
       </XYPlot>
       </div>
     );

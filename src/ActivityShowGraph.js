@@ -16,8 +16,8 @@ class ActivityShowGraph extends Component {
 
     returnColor =(id) => {
         // Display the colour of the meal, depending on type
-        return id===3 ? "red" : 
-            id===2 ? "yellow" : "green"
+        return id===3 ? "darkblue" : 
+            id===2 ? "blue" : "lightblue"
     }
 
     // timeString = (date) => {
@@ -37,15 +37,18 @@ class ActivityShowGraph extends Component {
                     y: hourString(a.activity_date), 
                     label:a.detail,
                     size: this.categoriseCalories(a.calories), 
-                    style:{ color:this.returnColor(a.activity_type_id) }, 
+                    color:this.returnColor(a.activity_type_id), 
                     id:a.id };
         });    
         return data;
       };
     
   render() {
+
+    let graphData = this.genGraphData();
+
     return ( 
-        <div>
+        <div className="main_graph">
         
         <h2>Click on the graph, to select an activity to update or delete</h2>
         <XYPlot
@@ -60,9 +63,23 @@ class ActivityShowGraph extends Component {
         <YAxis title="Time" width={100} />
         <MarkSeries
             sizeRange={[5,15]}
-            data={this.genGraphData()}
+            data={graphData.filter(gd=>gd.color==="darkblue") }
+            color="darkblue"
             onValueClick= {(datapoint,event) => this.props.selectActivity(datapoint,event)}
         />
+        <MarkSeries
+            sizeRange={[5,15]}
+            data={graphData.filter(gd=>gd.color==="blue")}
+            color="blue"
+            onValueClick= {(datapoint,event) => this.props.selectActivity(datapoint,event)}
+        />
+        <MarkSeries
+            sizeRange={[5,15]}
+            data={graphData.filter(gd=>gd.color==="lightblue")}
+            color="lightblue"
+             onValueClick= {(datapoint,event) => this.props.selectActivity(datapoint,event)}
+        />
+
       </XYPlot>
       </div>
     );

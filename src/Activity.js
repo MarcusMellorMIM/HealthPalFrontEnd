@@ -59,7 +59,11 @@ class Activity extends Component {
 
   fetch(this.props.apiActivitiesUrl, getConfigObj("POST", this.state.activity.detail))
       .then(data => data.json())
-      .then(data => Object.assign(activity,{activity_details:data}))
+      .then(data => {
+        activity.calories=this.activityTotalCalories(data)
+        Object.assign(activity,{activity_details:data})
+        return activity
+      })
       .then(data => this.setState({activity:data}))
   
     };
@@ -135,23 +139,26 @@ class Activity extends Component {
   render() {
     // Now render the activity view
     return (
-      <div>
+      <div className="activity_main">
+      <h1 className="main_title1">Activities</h1>
+      <h1 className="main_title2">and</h1>
+      <h1 className="main_title3">Exercise</h1>
 
-        <div>
+        <div className="main_entry">
           <h2>Record your activity here</h2>
           <form onSubmit={this.submitActivity}>
             <label htmlFor="activityDetail">Natural language search here </label>
             <input
+              className="main_entry_input"
               type="text"
-              className="largetext"
               id="activityDetail"
               name="detail"
               value={this.state.activity.detail}
               onChange={this.changeActivity}
             />
             <button
+              className="main_entry_button"
               type="submit"
-              className="submitBtn"
               id="activitysubmitBtn"
               name="activitysubmitBtn"
             >
@@ -162,7 +169,7 @@ class Activity extends Component {
         </div>
 
         {this.state.activity.activity_details.length > 0 ? (
-
+          <div className="main_graph">
             <ActivityShowDetail
               activity={this.state.activity}
               changeActivityDetail={this.changeActivityDetail}
@@ -173,6 +180,7 @@ class Activity extends Component {
               deleteActivity={this.deleteActivity}
               resetActivity={this.resetActivity}
             />
+            </div>
         )
         : 
         <ActivityShowGraph

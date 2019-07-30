@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { dateString } from "./helpers";
-import './Signup.css'
 
 class Signup extends Component {
   render() {
@@ -125,7 +124,7 @@ class Signup extends Component {
                 <button className="signup_buttons" >
                       {this.props.user.navlink==='Weight' ? <NavLink to="/Weight">Smart navigation</NavLink> :
                       this.props.user.navlink==='Input'  ? <NavLink to="/Input">Smart navigation</NavLink> :
-                      this.props.user.navlink==='Activity' ? <NavLink to="/Weight">Smart navigation</NavLink> :
+                      this.props.user.navlink==='Activity' ? <NavLink to="/Activity">Smart navigation</NavLink> :
                       this.props.user.navlink==='Account' ? <NavLink to="/Account">Smart navigation</NavLink> : null}
                 </button>
             : null }

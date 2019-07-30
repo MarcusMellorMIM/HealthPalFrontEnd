@@ -11,6 +11,7 @@ import {
   VerticalGridLines,
   MarkSeries
 } from "react-vis";
+import { _adjustCategoricalScale } from "react-vis/dist/utils/scales-utils";
 
 const EMPTYWEIGHT = {
   id: "",
@@ -127,18 +128,18 @@ export default class Weight extends Component {
     const { id, weight_kg, weight_date_d, weight_date_t } = this.state.weight;
 
     return (
-      <div>
-        <div>
-          {!id ? (
-            <h2>Record your weight here</h2>
-          ) : (
-            <h2>Update the selected weight here</h2>
-          )}
+        <div className="weight_main">
+              <h1 className="main_title1">Record</h1>
+              <h1 className="main_title2">your</h1>
+              <h1 className="main_title3">Weight</h1>
 
-          <form onSubmit={this.submitWeight}>
-            <input type="hidden" id="weight_id" name="weight_id" value={id} />
+      
+          <div className="main_entry">
+          <form>
+            {!id ? (<h2>Record your weight here</h2>) : (<h2>Update the selected weight here</h2>)}
             <label htmlFor="weight_kg">Please enter your latest weight </label>
             <input
+              className="main_entry_input"
               type="number"
               id="weight_kg"
               name="weight_kg"
@@ -146,8 +147,48 @@ export default class Weight extends Component {
               onChange={this.changeWeight}
             />
             <label name="weight_kg"> in kilograms.</label>
+            <hr />
+            </form>
+          </div>
+        
+
+          {weight_kg!=="" ? (
+            <div className="main_show_details">
+            <form onSubmit={this.submitWeight}>
+            <input type="hidden" id="weight_id" name="weight_id" value={id} />
+
+              {!!id ? (
+              <div>
+              <label htmlFor="deleteBtn">
+                Hit delete, to remove this entry
+              </label>
+              <br />
+              <button
+                className="submit_button"
+                type="submit"
+                id="deleteBtn"
+                name="deleteBtn"
+                onClick={this.deleteWeight}>Delete</button>
+              <br />
+              <br />
+              <label htmlFor="weight_kg">Amend you weight, in kilograms, here </label>
+              <br />
+            <input
+              type="number"
+              id="weight_kg"
+              name="weight_kg"
+              value={weight_kg}
+              onChange={this.changeWeight}
+            />
+
+              </div>
+              ) : (null) }
+
+
             <br />
-            <label htmlFor="weight_date_d">Enter the date </label>
+            <label htmlFor="weight_date_d">Enter the date/time or leave blank for now </label>
+            <br />
+
             <input
               type="date"
               id="weight_date_d"
@@ -155,9 +196,7 @@ export default class Weight extends Component {
               value={weight_date_d}
               onChange={this.changeWeight}
             />
-            <label name="weight_date"> or leave blank if recorded today.</label>
-            <br />
-            <label htmlFor="weight_t">Enter the time </label>
+
             <input
               type="time"
               id="weight_date_t"
@@ -165,43 +204,31 @@ export default class Weight extends Component {
               value={weight_date_t}
               onChange={this.changeWeight}
             />
-            <label name="weight_date"> or leave blank if taken now.</label>
+
             <br />
-            <label htmlFor="submitBtn">Hit submit, to save this entry</label>
-            <button type="submit" id="submitBtn" name="submitBtn">
-              Submit
+            <br />
+            <label htmlFor="submitBtn">Press Confirm, to save this entry</label>
+            <br />
+            <button className="submit_button" type="submit" id="submitBtn" name="submitBtn">
+              Confirm
             </button>
+            <br />
           </form>
 
-          {!!id ? (
             <div>
-              <label htmlFor="deleteBtn">
-                Hit delete, to remove this entry, or undo
-              </label>
+              <br />
               <button
-                type="submit"
-                id="deleteBtn"
-                name="deleteBtn"
-                onClick={this.deleteWeight}
-              >
-                Delete
-              </button>
-              <button
+                className="undo_button"
                 type="submit"
                 id="resetBtn"
                 name="resetBtn"
-                onClick={this.resetWeight}
-              >
-                Undo
-              </button>
-            </div>
-          ) : null}
+                onClick={this.resetWeight}>Undo</button>
+                </div>
+          </div>
 
-          <hr />
-        </div>
+          ) : (
 
-        <div>
-          <div>
+          <div className="main_graph">
             <h2>Click on the graph, to select a weight to update or delete</h2>
             <XYPlot
               xType="time"
@@ -209,20 +236,6 @@ export default class Weight extends Component {
               width={500}
               margin={{ left: 120, right: 20, top: 20, bottom: 120 }}
             >
-              {/* <ChartLabel
-          text="Date"
-          className="alt-x-label"
-          includeMargin={true}
-          xPercent={0.9}
-          yPercent={1.01}
-          />
-          <ChartLabel
-          text="Weight (kgs)"
-          className="alt-y-label"
-          includeMargin={false}
-          xPercent={-0.07}
-          yPercent={0.06}
-          /> */}
               <HorizontalGridLines />
               <VerticalGridLines />
               <XAxis title="Time" />
@@ -230,14 +243,13 @@ export default class Weight extends Component {
               <MarkSeries
                 color="red"
                 data={this.genGraphData()}
-                onValueClick={(datapoint, event) =>
-                  this.selectWeight(datapoint, event)
-                }
+                onValueClick={(datapoint, event) => this.selectWeight(datapoint, event)}
               />
             </XYPlot>
           </div>
-        </div>
+            )};
       </div>
-    );
+      ) 
+    }
+
   }
-}

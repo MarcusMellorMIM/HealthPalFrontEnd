@@ -1,0 +1,24 @@
+.main_nav {
+    background-color:#005479;
+    color: #fff;
+    position: relative;
+}
+
+.main_nav ul { /* will only target ul that is a child of element with class main */
+    margin: 0; /* A ul has a margin, and so will add space */
+    list-style: none; /* Will remove the dots in an li element */
+    padding: 0; /* Gets rid of li padding */
+    background-color: blue;
+    float: right;
+    position: relative;
+
+}
+
+.main_nav a { /* anchors, child of ul, child of main_nav class */
+    display: inline-block; /* Inline will only take width and height from content. */
+    color: #fff; /* Set the text white */
+    text-decoration: none; /* Gets rid of the underlines */
+    text-transform: capitalize; /* transforms the text */
+    font-size: 1.3em;
+    padding: 1em; /* Pads around the content */
+}

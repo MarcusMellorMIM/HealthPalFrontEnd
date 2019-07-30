@@ -58,7 +58,11 @@ class Input extends Component {
 
     fetch(this.props.apiInputsUrl, getConfigObj("POST", this.state.input.detail) )
       .then(data => data.json())
-      .then(data => Object.assign(input,{input_details:data}))
+      .then(data => {
+        input.calories=this.inputTotalCalories(data);
+        Object.assign(input,{input_details:data})
+        return input
+      })
       .then( data => this.setState( { input: data } ))
   
   };
@@ -91,6 +95,8 @@ class Input extends Component {
     // Creates new input and input detail records
     console.log("Creating a new input")
     let inputs = [...this.props.inputs];
+
+    console.log(this.state.input.input_details)
 
     fetch(this.props.inputsUrl, getConfigObj("POST", this.state.input))
       .then(data => data.json())
@@ -135,22 +141,26 @@ class Input extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          <h2>Record your food, drinks and snacks here</h2>
+      <div className="input_main">
+        <h1 className="main_title1">Food</h1>
+        <h1 className="main_title2">and</h1>
+        <h1 className="main_title3">Drink</h1>
+
+        <div className="main_entry">
           <form onSubmit={this.submitInput}>
-            <label htmlFor="inputDetail">Natural language search here </label>
+          <h2>Record your food, drinks and snacks here</h2>
+           <label htmlFor="inputDetail">Natural language search here </label>
             <input
+              className="main_entry_input"
               type="text"
-              className="largetext"
               id="inputDetail"
               name="detail"
               value={this.state.input.detail}
               onChange={this.changeInput}
             />
             <button
+              className="main_entry_button"
               type="submit"
-              className="submitBtn"
               id="inputsubmitBtn"
               name="inputsubmitBtn"
             >
@@ -161,7 +171,7 @@ class Input extends Component {
         </div>
 
         {this.state.input.input_details.length > 0 ? (
-
+          <div className="main_graph">
             <InputShowDetail
               input={this.state.input}
               changeInputDetail={this.changeInputDetail}
@@ -172,6 +182,7 @@ class Input extends Component {
               deleteInput={this.deleteInput}
               resetInput={this.resetInput}  
             />
+          </div>
         )
         : 
         <InputShowGraph

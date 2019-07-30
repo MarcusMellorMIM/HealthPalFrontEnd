@@ -6,9 +6,19 @@ import ActivityDetail from "./ActivityDetail";
 class ActivityShowDetail extends Component {
   render() {
     return (
-      <div>
+      <div className="main_show_details">
+
+          <h3>{this.props.activity.detail},totalling {this.props.activity.calories} calories</h3>
+          {!!this.props.activity.id ?
+            <div>
+            <label htmlFor="deleteBtn">Hit delete, to remove this entry</label>
+            <br/>
+            <button className="submit_button" id="deleteBtn" name="deleteBtn" onClick={this.props.deleteActivity}>Delete</button>
+            </div>
+            : null }
+
         <div>
-{/* Display the API rendered food details */}
+
           <tbody>
             {this.props.activity.activity_details.map((ed, index) => (
               <ActivityDetail
@@ -24,11 +34,11 @@ class ActivityShowDetail extends Component {
 {/* Now display the rest of the form items to allow a user to 
 save the exercise into the database */}
         <div>
-          <h2>Totalling {this.props.activity.calories} calories</h2>
           <form onSubmit={this.props.submitActivityDetail}>
             <label htmlFor="activityDate">
               Enter date/time or leave blank for now{" "}
             </label>
+            <br/>
             <input
               type="date"
               id="activityDate"
@@ -43,7 +53,12 @@ save the exercise into the database */}
               value={this.props.activity.activity_date_t}
               onChange={this.props.changeActivity}
             />
-            <label htmlFor="activity_type_id">How would you describe this ? </label>
+
+            <br/>
+            <br/>
+
+            <label htmlFor="activity_type_id">How would you describe this activity ? </label>
+            <br/>
             <select
               defaultValue="1"
               name="activity_type_id"
@@ -54,28 +69,26 @@ save the exercise into the database */}
               <option value="2">Moderate</option>
               <option value="3">Intense</option>
             </select>
+
+            <br/>
+            <br/>
+
+            <label htmlFor="activityDetailSubmitBtn">Press Confirm to save your entry</label>
+            <br/>
             <button
               type="submit"
-              className="submitBtn"
+              className="submit_button"
               id="activityDetailSubmitBtn"
               name="activityDetailSubmitBtn"
               onChange={this.props.submitActivityDetail}
             >
-              Submit
+              Confirm
             </button>
           </form>
 
-            {!!this.props.activity.id ?
-            <div>
-            <label htmlFor="deleteBtn">Hit delete, to remove this entry, or undo</label>
-            <button id="deleteBtn" name="deleteBtn" onClick={this.props.deleteActivity}>
-              Delete
-            </button>
-            <button id="resetBtn" name="resetBtn" onClick={this.props.resetActivity}>
-              Undo
-            </button>
-            </div>
-            : null }
+            <br/>
+
+            <button className="undo_button" id="resetBtn" name="resetBtn" onClick={this.props.resetActivity}>Undo</button>
 
         </div>
       </div>

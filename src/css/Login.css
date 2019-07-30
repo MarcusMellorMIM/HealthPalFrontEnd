@@ -10,7 +10,7 @@ body {
 /* Recomend you add stark colours as background until you have sorted margins and paddings etc */
 .login {
   height: 90vh; /* Is responsive as we use view height */
-  background: linear-gradient( #005479, #012b44 ); /* Sets a background gradient .. you can add % for gradients */
+  background: linear-gradient( #005479, #94d5fa ); /* Sets a background gradient .. you can add % for gradients */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ body {
   opacity: .1; /* Make it see thru */
 /*  transform: translate(0,-30%) rotate(-10deg); */
   position: absolute;
-  right: +25%; 
+/*  right: +25%;*/ 
   z-index: 1; /* A positioning attribute */
 }
 

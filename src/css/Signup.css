@@ -10,7 +10,7 @@
   /* Recomend you add stark colours as background until you have sorted margins and paddings etc */
   .signup {
     height: 90vh; /* Is responsive as we use view height */
-    background: linear-gradient( #005479, #012b44 ); /* Sets a background gradient .. you can add % for gradients */
+    background: linear-gradient( #005479, #94d5fa ); /* Sets a background gradient .. you can add % for gradients */
     position: relative;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
   }
 
   .signup_title_create {
-    font-size: 15em; /* Very big */
+    font-size: 20em; /* Very big */
     color: #fff; /* Color is white */
     opacity: .1; /* Make it see thru */
   /*  transform: translate(0,-30%) rotate(-10deg); */
@@ -32,12 +32,11 @@
   }
   
   .signup_title_account {
-    font-size: 15em; /* Very big */
+    font-size: 20em; /* Very big */
   color: #fff; /* Color is white */
   opacity: .1; /* Make it see thru */
 /*  transform: translate(0,-30%) rotate(-10deg); */
   position: absolute;
-  right: +10%; 
   z-index: 1; /* A positioning attribute */
 }
 

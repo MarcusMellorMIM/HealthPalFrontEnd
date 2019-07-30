@@ -8,10 +8,15 @@ import NavBar from "./NavBar";
 import Weight from "./Weight";
 import Input from "./Input";
 import Activity from "./Activity";
+import './css/Input.css'
+import './css/Login.css'
+import './css/Signup.css'
+import './css/Weight.css'
+import './css/Activity.css'
+import './css/Navbar.css'
 
-
-const BASE_URL = `http://localhost:3000`
-//const BASE_URL = `https://healthpal-api.herokuapp.com`;
+//const BASE_URL = `http://localhost:3000`
+const BASE_URL = `https://healthpal-api.herokuapp.com`;
 const USERS_URL = `${BASE_URL}/users`;
 const WEIGHTS_URL = `${BASE_URL}/weights`;
 const INPUTS_URL = `${BASE_URL}/inputs`;

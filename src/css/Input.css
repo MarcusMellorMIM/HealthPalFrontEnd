@@ -1,0 +1,105 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 14px;
+}
+
+.input_main {
+    height: 90vh; /* Is responsive as we use view height */
+    background: linear-gradient( #005479, #f4ccf7 ); /* Sets a background gradient .. you can add % for gradients */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .main_title1 {
+    font-size: 20em; /* Very big */
+    color: #fff; /* Color is white */
+    opacity: .1; /* Make it see thru */
+  /*  transform: translate(0,-30%) rotate(-10deg); */
+    position: absolute;
+    top: +0%;
+    text-align: left;
+    line-height: 0%; 
+    z-index: 1; /* A positioning attribute */
+  }
+  
+  .main_title2 {
+    font-size: 15em; /* Very big */
+    color: #fff; /* Color is white */
+    opacity: .1; /* Make it see thru */
+    position: absolute;
+    top: 15%;
+    z-index: 1; /* A positioning attribute */
+  }
+  
+  .main_title3 {
+    font-size: 20em; /* Very big */
+    color: #fff; /* Color is white */
+    opacity: .1; /* Make it see thru */
+    position: absolute;
+    z-index: 1; /* A positioning attribute */
+  }
+
+  .main_entry {
+    display: flex; 
+    flex-direction: column;
+    z-index: 10;
+    align-content: center;
+    text-align: center;
+    z-index: 10;
+  }
+
+  .main_entry_input {
+    opacity: .5; /* Make it see thru */
+    width: 20em;
+    z-index: 20;
+  }
+  
+
+  .main_entry_buttons {
+    width: 20em;
+    margin: auto;
+    z-index: 20;
+  }
+
+  .main_graph {
+     display: flex; 
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    z-index: 20;
+  }
+
+  .main_show_details {
+    display: flex; 
+    flex-direction: column;
+    z-index: 10;
+    align-content: center;
+    text-align: center;
+    z-index: 10;
+    background: #fff;
+    border-radius: 5%;
+    border-style: outset;
+    border-color: darkgrey;
+    z-index: 20;
+    color: black;
+    padding: 2em;
+  }
+
+.undo_button {
+    align-content: center;
+    text-align: center;
+    width: 10em;
+}
+
+.submit_button {
+    align-content: center;
+    text-align: center;
+    width: 10em;
+}

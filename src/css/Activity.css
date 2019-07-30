@@ -1,0 +1,10 @@
+.activity_main {
+    height: 90vh; /* Is responsive as we use view height */
+    background: linear-gradient( #005479, #c1f5c8 ); /* Sets a background gradient .. you can add % for gradients */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+  }
