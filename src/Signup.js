@@ -7,8 +7,9 @@ class Signup extends Component {
     return (
       <div className="signup">
 
-          <h1 className="signup_title_create">{this.props.isLoggedIn ? "Amend" : "Create" }</h1>
-          <h1 className="signup_title_account">Account</h1>
+          <h1 className="main_title1">{this.props.isLoggedIn ? "Amend" : "Create" }</h1>
+          <h1 className="main_title2">your</h1>
+          <h1 className="main_title3">Account</h1>
           <div className="signup_instruction1">
                 <p>{this.props.isLoggedIn ? "Amend" : "Create" } your account here</p>
                 <p>Even though your data is protected with JWT authentication, we cannot guarantee its security until a production service is released. Please do not enter any data that you deem personal, and that you are unwilling to share.</p>
@@ -27,8 +28,7 @@ class Signup extends Component {
 
           {this.props.isLoggedIn ? 
             <div className="signup_logged_in">
-              <h3> {`Hi ${this.props.user.name}, you are logged in. Please feel free to amend any details.`}</h3>
-              <h3> Remember to logout when you are done, especially if you are on a shared computer</h3>
+              <h3> {`Hi ${this.props.user.name}, you are now logged in. If you are on a shared computer, please make sure you logout when you are done.`}</h3>
               <button className="login_buttons" onClick={this.props.handleLogOut}>Log Out</button>
               <br/>
               <br/>

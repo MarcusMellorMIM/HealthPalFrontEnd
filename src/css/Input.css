@@ -13,36 +13,37 @@ body {
     display: flex;
     flex-direction: column;
     color: #fff;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
   }
   
   .main_title1 {
-    font-size: 20em; /* Very big */
+    font-size: 18em; /* Very big */
     color: #fff; /* Color is white */
     opacity: .1; /* Make it see thru */
   /*  transform: translate(0,-30%) rotate(-10deg); */
     position: absolute;
-    top: +0%;
+    top: -10%;
     text-align: left;
     line-height: 0%; 
-    z-index: 1; /* A positioning attribute */
+    z-index: 0; /* A positioning attribute */
   }
   
   .main_title2 {
-    font-size: 15em; /* Very big */
+    font-size: 13em; /* Very big */
     color: #fff; /* Color is white */
     opacity: .1; /* Make it see thru */
     position: absolute;
-    top: 15%;
+    top: 10%;
     z-index: 1; /* A positioning attribute */
   }
   
   .main_title3 {
-    font-size: 20em; /* Very big */
+    font-size: 18em; /* Very big */
     color: #fff; /* Color is white */
     opacity: .1; /* Make it see thru */
     position: absolute;
+    top: 30%;
     z-index: 1; /* A positioning attribute */
   }
 

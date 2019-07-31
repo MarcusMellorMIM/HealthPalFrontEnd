@@ -222,7 +222,7 @@ export default class Weight extends Component {
                 type="submit"
                 id="resetBtn"
                 name="resetBtn"
-                onClick={this.resetWeight}>Undo</button>
+                onClick={this.resetWeight}>Back</button>
                 </div>
           </div>
 

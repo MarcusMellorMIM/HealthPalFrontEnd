@@ -88,7 +88,7 @@ save the exercise into the database */}
 
             <br/>
 
-            <button className="undo_button" id="resetBtn" name="resetBtn" onClick={this.props.resetActivity}>Undo</button>
+            <button className="undo_button" id="resetBtn" name="resetBtn" onClick={this.props.resetActivity}>Back</button>
 
         </div>
       </div>

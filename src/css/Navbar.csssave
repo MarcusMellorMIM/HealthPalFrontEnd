@@ -1,7 +1,6 @@
 .main_nav {
     background-color: #005479;
     width:  100%;
-    z-index: 20;
 }
 
 .main_nav ul { /* will only target ul that is a child of element with class main */
@@ -10,7 +9,7 @@
     padding: 0; /* Gets rid of li padding */
     background-color: #005479;
     position: relative;
-    z-index: 20;
+
 }
 
 .main_nav ul li {
@@ -18,13 +17,11 @@
     background-color: #005479;
     font-size: 1.3em;
     padding: 1em; /* Pads around the content */
-    z-index: 20;
 }
 
 .main_nav ul a { /* anchors, child of ul, child of main_nav class */
     color: #fff; /* Set the text white */
     text-decoration: none; /* Gets rid of the underlines */
     text-transform: capitalize; /* transforms the text */
-    z-index: 20;
 }
 

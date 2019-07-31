@@ -86,7 +86,7 @@ save the meal into the database */}
 
           <br/>
 
-          <button className="undo_button" id="resetBtn" name="resetBtn" onClick={this.props.resetInput}>Undo</button>
+          <button className="undo_button" id="resetBtn" name="resetBtn" onClick={this.props.resetInput}>Back</button>
 
         </div>
       </div>
