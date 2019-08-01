@@ -45,11 +45,11 @@ export default class Weight extends Component {
 
   deleteWeight = () => {
     // The handler that changes the weight state, for either new or updates of a weight
-
-    fetch(`${this.props.weightsUrl}/${this.state.weight.id}`, getConfigObj("DELETE"))
+    let weight_id = this.state.weight.id;
+    fetch(`${this.props.weightsUrl}/${weight_id}`, getConfigObj("DELETE"))
     .then(() => {
       // Pass the weight into the callback to remove from app.state.weights
-      let weights = this.props.weights.filter(w => w.id !== this.state.weight.id);
+      let weights = this.props.weights.filter(w => w.id !== weight_id);
       this.props.setAppState({ weights: weights });
       this.setState({ weight: EMPTYWEIGHT });
     });
@@ -154,8 +154,6 @@ export default class Weight extends Component {
 
           {weight_kg!=="" ? (
             <div className="main_show_details">
-            <form onSubmit={this.submitWeight}>
-            <input type="hidden" id="weight_id" name="weight_id" value={id} />
 
               {!!id ? (
               <div>
@@ -165,10 +163,18 @@ export default class Weight extends Component {
               <br />
               <button
                 className="submit_button"
-                type="submit"
                 id="deleteBtn"
                 name="deleteBtn"
-                onClick={this.deleteWeight}>Delete</button>
+              onClick={this.deleteWeight}>Delete</button>  
+              </div> )
+              : (null) }
+
+
+            <form onSubmit={this.submitWeight}>
+            <input type="hidden" id="weight_id" name="weight_id" value={id} />
+
+              {!!id ? (
+              <div>
               <br />
               <br />
               <label htmlFor="weight_kg">Amend you weight, in kilograms, here </label>
