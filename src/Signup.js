@@ -29,10 +29,17 @@ class Signup extends Component {
           {this.props.isLoggedIn ? 
             <div className="signup_logged_in">
               <h3> {`Hi ${this.props.user.name}, you are now logged in. If you are on a shared computer, please make sure you logout when you are done.`}</h3>
-              <button className="login_buttons" onClick={this.props.handleLogOut}>Log Out</button>
+                <button className="login_buttons" 
+                      onClick={this.props.handleLogOut}>
+                      Log Out
+                </button>
               <br/>
               <br/>
-            </div> : null }
+            </div> :
+            <div className="signup_logged_in"> 
+                <h3>Create a new account here. Please fill in, at least, the username, password and name to create an account. If you want to calculate your BMR, then please fill in your dob, gender and height. We are happy for you to approximate your date of birth as just need your age in years.</h3>
+            </div>
+            }
 
         <form className="signup_entry" onSubmit={this.props.submitUser}>
 
