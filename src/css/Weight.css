@@ -1,4 +1,5 @@
 .weight_main {
+    /* border-top: 10vh; */
     height: 90vh; /* Is responsive as we use view height */
     background: linear-gradient( #005479, #ffffff ); /* Sets a background gradient .. you can add % for gradients */
     position: relative;

@@ -2,6 +2,12 @@
     background-color: #005479;
     width:  100%;
     z-index: 20;
+    display:flex;
+    justify-content: flex-end;
+    /* overflow: auto; Should help reduce need for <BR> */
+    /* float: right; */
+    /* position: absolute;
+    height: 8%; */
 }
 
 .main_nav ul { /* will only target ul that is a child of element with class main */
@@ -9,9 +15,11 @@
     list-style: none; /* Will remove the dots in an li element */
     padding: 0; /* Gets rid of li padding */
     background-color: #005479;
-    position: relative;
+    /* position: relative; */
     z-index: 20;
-}
+    /* float: right; */
+    /* display: inline-block; */
+} /* Possibly add display:inline-block then float:right */
 
 .main_nav ul li {
     display: inline-block; /* Inline will only take width and height from content. */
@@ -19,6 +27,8 @@
     font-size: 1.3em;
     padding: 1em; /* Pads around the content */
     z-index: 20;
+    /* position: absolute;
+    float: right; */
 }
 
 .main_nav ul a { /* anchors, child of ul, child of main_nav class */
